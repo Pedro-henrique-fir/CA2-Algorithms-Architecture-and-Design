@@ -1,4 +1,3 @@
-
 firstName,lastName,gender,email,salary,department,jobTitle,managerType
 Olivia,Byrne,Female,olivia.byrne@school.com,48500,Mathematics,Mathematics Teacher,Non-Manager
 Daniel,Murphy,Male,daniel.murphy@school.com,42000,IT,IT Technician,Non-Manager
