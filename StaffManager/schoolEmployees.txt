@@ -1,0 +1,22 @@
+
+firstName,lastName,gender,email,salary,department,jobTitle,managerType
+Olivia,Byrne,Female,olivia.byrne@school.com,48500,Mathematics,Mathematics Teacher,Non-Manager
+Daniel,Murphy,Male,daniel.murphy@school.com,42000,IT,IT Technician,Non-Manager
+Sarah,Kelly,Female,sarah.kelly@school.com,85000,Administration,School Principal,Principal
+Jack,Wilson,Male,jack.wilson@school.com,46000,English,English Teacher,Non-Manager
+Grace,Nolan,Female,grace.nolan@school.com,62000,Science,Science Teacher,Head of Department
+Adam,Walsh,Male,adam.walsh@school.com,43000,Finance,Finance Officer,Non-Manager
+Sophie,Ryan,Female,sophie.ryan@school.com,49000,Mathematics,Mathematics Teacher,Non-Manager
+Michael,Collins,Male,michael.collins@school.com,75000,Administration,Deputy Principal,Deputy Principal
+Emily,OConnor,Female,emily.oconnor@school.com,61000,English,English Teacher,Head of Department
+James,Doyle,Male,james.doyle@school.com,47000,Science,Science Teacher,Non-Manager
+Hannah,Clarke,Female,hannah.clarke@school.com,44000,Student Services,School Counsellor,Non-Manager
+Ben,Hughes,Male,ben.hughes@school.com,45000,IT,IT Technician,Non-Manager
+Chloe,Martin,Female,chloe.martin@school.com,41000,Finance,Finance Assistant,Non-Manager
+Ryan,Stewart,Male,ryan.stewart@school.com,63000,Mathematics,Mathematics Teacher,Head of Department
+Ava,Thompson,Female,ava.thompson@school.com,46000,English,English Teacher,Non-Manager
+Ethan,Brooks,Male,ethan.brooks@school.com,48000,Science,Science Teacher,Non-Manager
+Lucy,Bennett,Female,lucy.bennett@school.com,39000,Administration,School Secretary,Non-Manager
+Noah,Evans,Male,noah.evans@school.com,42000,Student Services,Student Support Officer,Non-Manager
+Mia,Foster,Female,mia.foster@school.com,47000,Science,Science Teacher,Non-Manager
+Oliver,Reed,Male,oliver.reed@school.com,45000,English,English Teacher,Non-Manager

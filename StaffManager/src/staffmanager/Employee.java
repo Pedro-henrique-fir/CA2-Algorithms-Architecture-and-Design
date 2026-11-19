@@ -95,5 +95,9 @@ public class Employee {
         return managerType;
     }
     
+    public String getFullName() {
+        return firstName + " " + lastName;
+    }
+    
     
 }
