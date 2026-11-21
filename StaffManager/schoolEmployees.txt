@@ -19,3 +19,13 @@ Lucy,Bennett,Female,lucy.bennett@school.com,39000,Administration,School Secretar
 Noah,Evans,Male,noah.evans@school.com,42000,Student Services,Student Support Officer,Non-Manager
 Mia,Foster,Female,mia.foster@school.com,47000,Science,Science Teacher,Non-Manager
 Oliver,Reed,Male,oliver.reed@school.com,45000,English,English Teacher,Non-Manager
+Liam,Anderson,Male,liam.anderson@school.com,51000,Mathematics,Mathematics Teacher,Non-Manager
+Emma,Roberts,Female,emma.roberts@school.com,53000,English,English Teacher,Non-Manager
+Oscar,Mitchell,Male,oscar.mitchell@school.com,64000,IT,IT Manager,Head of Department
+Isabella,Turner,Female,isabella.turner@school.com,47000,Science,Science Teacher,Non-Manager
+Harry,Cooper,Male,harry.cooper@school.com,44000,Finance,Finance Assistant,Non-Manager
+Amelia,Parker,Female,amelia.parker@school.com,58000,Student Services,School Counsellor,Non-Manager
+George,Phillips,Male,george.phillips@school.com,49000,Science,Science Teacher,Non-Manager
+Charlotte,Edwards,Female,charlotte.edwards@school.com,55000,Mathematics,Mathematics Teacher,Non-Manager
+Thomas,Campbell,Male,thomas.campbell@school.com,46000,IT,IT Technician,Non-Manager
+Ella,Richardson,Female,ella.richardson@school.com,42000,Administration,School Secretary,Non-Manager

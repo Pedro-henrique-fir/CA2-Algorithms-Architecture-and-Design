@@ -16,19 +16,6 @@ import java.util.ArrayList;
 public class EmployeeFileReader {
  
     
-    
-    public static void main(String[] args) {
-
-        ArrayList<Employee> employees = readFile("SchoolEmployees.txt");
-
-        System.out.println("Total: " + employees.size());
-
-        for (Employee employee : employees) {
-            System.out.println(employee.getFullName());
-        }
-    }
-
-    
     public static ArrayList<Employee> readFile(String fileName) {
         
         ArrayList<Employee> employees = new ArrayList<>();

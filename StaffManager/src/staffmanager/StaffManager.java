@@ -5,6 +5,8 @@
 package staffmanager;
 
 import java.util.Scanner;
+import java.util.ArrayList;
+
 
 /**
  *
@@ -17,6 +19,9 @@ public class StaffManager {
      */
     public static void main(String[] args) {
         Scanner myKB = new Scanner(System.in);
+        
+        ArrayList<Employee> employees = EmployeeFileReader.readFile("SchoolEmployees.txt");
+        System.out.println(employees.size());
         
         while(true){
             
@@ -34,6 +39,27 @@ public class StaffManager {
 
                 case "1":
                     System.out.println("Sort");
+                    
+                    if (employees.isEmpty()) {
+                        System.out.println("No employees available.");
+                        break;
+                    }
+
+                    MergeSort.mergeSort(employees, 0, employees.size() - 1);
+
+                    System.out.println("\nEmployees Sorted:");
+
+                    int limit = 20;
+                    
+                    if (employees.size() < 20) {
+                         limit = employees.size();
+                        
+                    }
+
+                    for (int i = 0; i < limit; i++) {
+                        System.out.println((i + 1) + " - " + employees.get(i).getFullName());
+                    }
+
                     break;
 
                 case "2":
