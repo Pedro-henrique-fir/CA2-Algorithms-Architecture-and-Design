@@ -21,6 +21,24 @@ public class StaffManager {
         
         boolean isEmployeeSorted = false;
         
+        String[] departments = {
+            "Mathematics",
+            "English",
+            "Science",
+            "Humanities",
+            "IT",
+            "Finance",
+            "Administration",
+            "Student Services"
+        };
+
+        String[] managerTypes = {
+            "Non-Manager",
+            "Head of Department",
+            "Deputy Principal",
+            "Principal"
+        };
+        
         Scanner myKB = new Scanner(System.in);
         
         ArrayList<Employee> employees = EmployeeFileReader.readFile("SchoolEmployees.txt");
@@ -96,7 +114,7 @@ public class StaffManager {
 
                         Employee employee = employees.get(index);
 
-                        System.out.println("\nEmployee found!");
+                        System.out.println("\nEmployee found");
                         System.out.println("Name: " + employee.getFullName());
                         System.out.println("Department: " + employee.getDepartment());
                         System.out.println("Manager Type: " + employee.getManagerType());
@@ -105,7 +123,59 @@ public class StaffManager {
                     break;
 
                 case "3":
-                    System.out.println("Add Employee");
+                    String firstName = requiredField(myKB, "\nFirst name: ");
+                    String lastName = requiredField(myKB, "Last name: ");
+                    
+                    System.out.println("\nDepartments:");
+
+                    for (int i = 0; i < departments.length; i++) {
+                        System.out.println((i + 1) + " - " + departments[i]);
+                        
+                    }
+
+                    
+                    int departmentChoice = takeChoice(myKB, "\nChoose a department: ", departments.length);
+                    String department = departments[departmentChoice - 1];
+                    
+                    
+                    System.out.println("\nManager Types:");
+
+                    for (int i = 0; i < managerTypes.length; i++) {
+                        System.out.println((i + 1) + " - " + managerTypes[i]);
+                        
+                        
+                    }
+                    
+                    int managerChoice = takeChoice(myKB, "\nChoose a manager type: ", managerTypes.length);
+                    String managerType = managerTypes[managerChoice - 1];
+
+
+                    String gender = requiredField(myKB, "Gender: ");
+
+                    String email = checkEmail(myKB);
+
+                    double salary = checkSalary(myKB);
+
+                    String jobTitle = requiredField(myKB, "Job title: ");
+
+                    
+                    Employee newEmployee = new Employee(firstName, lastName, gender, email, salary, department, jobTitle, managerType);
+                    
+                    employees.add(newEmployee);
+                    isEmployeeSorted = false;
+
+
+                    System.out.println("\nEMPLOYEE DETAILS:");
+                    System.out.println("Name: " + newEmployee.getFullName());
+                    System.out.println("Gender: " + gender);
+                    System.out.println("Email: " + email);
+                    System.out.println("Salary: " + salary);
+                    System.out.println("Department: " + department);
+                    System.out.println("Job Title: " + jobTitle);
+                    System.out.println("Manager Type: " + managerType);
+
+                    System.out.println("\nEmployee added successfully!");
+
                     break;
 
                 case "4":
@@ -113,11 +183,85 @@ public class StaffManager {
                     return;
 
                 default:
-                    System.out.println("Invalid option!");
+                    System.out.println("Invalid option");
                     
             }
         }
         
     }
+    
+    
+    private static String requiredField(Scanner scanner, String message) {
+
+        while (true) {
+            System.out.print(message);
+            String value = scanner.nextLine().trim();
+
+            if (!value.isEmpty()) {
+                return value;
+            }
+
+            System.out.println("This can not be empty. Try again.");
+        }
+    }
+
+    private static int takeChoice(Scanner scanner, String message, int max) {
+
+        while (true) {
+            System.out.print(message);
+
+            try {
+                int choice = Integer.parseInt(scanner.nextLine().trim());
+
+                if (choice >= 1 && choice <= max) {
+                    return choice;
+                }
+
+                System.out.println("Choose a number between 1 and " + max + ".");
+
+                
+            } catch (NumberFormatException e) {
+                System.out.println("Invalid. Enter a number.");
+                
+            }
+        }
+    }
+
+    private static String checkEmail(Scanner scanner) {
+
+        while (true) {
+            System.out.print("Email: ");
+            String email = scanner.nextLine().trim();
+
+            if (!email.isEmpty() && email.contains("@")) {
+                return email;
+            }
+
+            System.out.println("Invalid email. Try again.");
+        }
+    }
+
+    private static double checkSalary(Scanner scanner) {
+
+        while (true) {
+            System.out.print("Annual salary: ");
+
+            try {
+                double salary = Double.parseDouble(scanner.nextLine().trim());
+
+                if (salary > 0) {
+                    return salary;
+                }
+
+                System.out.println("It must be a positive number");
+                
+
+            } catch (NumberFormatException e) {
+                System.out.println("Invalid salary. Enter a number.");
+                
+            }
+        }
+    }
+
     
 }
