@@ -42,8 +42,9 @@ public class StaffManager {
         Scanner myKB = new Scanner(System.in);
         
         ArrayList<Employee> employees = EmployeeFileReader.readFile("SchoolEmployees.txt");
-        System.out.println(employees.size());
+        ArrayList<Employee> newEmployees = new ArrayList<>();
         
+            
         while(true){
             
             System.out.println("\n===== SCHOOL EMPLOYEE MANAGEMENT =====");
@@ -170,19 +171,34 @@ public class StaffManager {
                     Employee newEmployee = new Employee(firstName, lastName, gender, email, salary, department, jobTitle, managerType);
                     
                     employees.add(newEmployee);
+                    newEmployees.add(newEmployee);
                     isEmployeeSorted = false;
 
 
-                    System.out.println("\nEMPLOYEE DETAILS:");
-                    System.out.println("Name: " + newEmployee.getFullName());
-                    System.out.println("Gender: " + gender);
-                    System.out.println("Email: " + email);
-                    System.out.println("Salary: " + salary);
-                    System.out.println("Department: " + department);
-                    System.out.println("Job Title: " + jobTitle);
-                    System.out.println("Manager Type: " + managerType);
+                    System.out.println("\n=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=");
+                    
+                    System.out.println("\nEMPLOYEE DETAILS:\n");
+                    System.out.println("    - Name: " + newEmployee.getFullName());
+                    System.out.println("    - Gender: " + gender);
+                    System.out.println("    - Email: " + email);
+                    System.out.println("    - Salary: " + salary);
+                    System.out.println("    - Department: " + department);
+                    System.out.println("    - Job Title: " + jobTitle);
+                    System.out.println("    - Manager Type: " + managerType);
 
                     System.out.println("\nEmployee added successfully!");
+                    
+                    System.out.println("Total employees: " + employees.size());
+                    System.out.println("\n=-=-=-= NEW EMPLOYEES =-=-=-= ");
+
+                    for (int i = 0; i < newEmployees.size(); i++) {
+
+                        Employee employee = newEmployees.get(i);
+
+                        System.out.println((i + 1) + " . " + employee.getFullName());
+                        System.out.println("    - Department: " + employee.getDepartment());
+                        System.out.println("    - Manager Type: " + employee.getManagerType());
+                    }
 
                     break;
 
