@@ -48,17 +48,25 @@ public class StaffManager {
             
             System.out.println("\n===== SCHOOL EMPLOYEE MANAGEMENT =====");
             
-            System.out.println("1. Sort Employees");
-            System.out.println("2. Search Employee");
-            System.out.println("3. Add Employee");
-            System.out.println("4. Exit");
+            for (MenuOption menu : MenuOption.values()) {
+                System.out.println(
+                        menu.getNumber() + ". " + menu.getDescription());
+            }
             
             System.out.print("Choose an option: ");      
-            String option = myKB.nextLine().trim();
+            
+            MenuOption option = MenuOption.findOption(myKB.nextLine().trim());
+            
+            if (option == null) {
+                System.out.println("Invalid option");
+                continue;
+                
+            }
+
                
             switch (option) {
 
-                case "1":
+                case SORT:
                     System.out.println("Sort");
                     
                     if (employees.isEmpty()) {
@@ -84,7 +92,7 @@ public class StaffManager {
 
                     break;
 
-                case "2":
+                case SEARCH:
                     if (employees.isEmpty()) {
                         System.out.println("No employees");
                         break;
@@ -122,7 +130,7 @@ public class StaffManager {
 
                     break;
 
-                case "3":
+                case ADD_RECORDS:
                     String firstName = requiredField(myKB, "\nFirst name: ");
                     String lastName = requiredField(myKB, "Last name: ");
                     
@@ -178,7 +186,7 @@ public class StaffManager {
 
                     break;
 
-                case "4":
+                case EXIT:
                     System.out.println("Exit");
                     return;
 
