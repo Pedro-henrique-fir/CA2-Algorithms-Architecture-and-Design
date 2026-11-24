@@ -98,6 +98,23 @@ public class Employee {
     public String getFullName() {
         return firstName + " " + lastName;
     }
-    
-    
+
+    public int getManagerRank() {
+        switch (managerType) {
+            case "Principal":
+                return 4;
+                
+            case "Deputy Principal":
+                return 3;
+                
+            case "Head of Department":
+                return 2;
+                
+            default:
+                return 1;
+        }
+        
+    }
+
+
 }

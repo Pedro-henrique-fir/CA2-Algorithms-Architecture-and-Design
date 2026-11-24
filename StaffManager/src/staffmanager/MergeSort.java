@@ -13,21 +13,31 @@ import java.util.ArrayList;
 public class MergeSort {
     
 
-    public static void mergeSort(ArrayList<Employee> employees, int left, int right){
+    public static void mergeSort(ArrayList<Employee> employees, int left, int right, boolean byManager){
 
         if (left < right) {
 
             int mid = (left + right) / 2;
 
-            mergeSort(employees, left, mid);
-            mergeSort(employees, mid + 1, right);
-            
-            merge(employees, left, mid, right);
+            mergeSort(employees, left, mid, byManager);
+            mergeSort(employees, mid + 1, right, byManager);
+
+            merge(employees, left, mid, right, byManager);
         }
     }
-    
-    
-    public static void merge(ArrayList<Employee> employees, int left, int mid, int right){
+
+
+    private static int compare(Employee a, Employee b, boolean byManager) {
+
+        if (byManager) {
+            return b.getManagerRank() - a.getManagerRank();
+        }
+
+        return a.getFullName().compareToIgnoreCase(b.getFullName());
+    }
+
+
+    public static void merge(ArrayList<Employee> employees, int left, int mid, int right, boolean byManager){
 
         int n1 = mid - left + 1;
         int n2 = right - mid;
@@ -51,8 +61,7 @@ public class MergeSort {
         
         while (i < n1 && j < n2) {
 
-            if (L.get(i).getFullName().compareToIgnoreCase(
-                    R.get(j).getFullName()) <= 0) {
+            if (compare(L.get(i), R.get(j), byManager) <= 0) {
 
                 employees.set(k, L.get(i));
                 i++;

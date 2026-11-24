@@ -73,7 +73,7 @@ public class EmployeeModel {
     }
 
     public void sortEmployees() {
-        MergeSort.mergeSort(employees, 0, employees.size() - 1);
+        MergeSort.mergeSort(employees, 0, employees.size() - 1, true);
         isEmployeeSorted = true;
         
     }
