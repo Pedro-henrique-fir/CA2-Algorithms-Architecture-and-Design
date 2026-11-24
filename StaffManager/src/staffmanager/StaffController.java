@@ -118,6 +118,14 @@ public class StaffController {
 
                     break;
 
+                case BINARY_TREE:
+
+                    EmployeeTree tree = model.buildEmployeeTree();
+
+                    StaffView.showEmployeeTree(tree.levelOrderTraversal(), tree.getHeight(), tree.getNodeCount());
+
+                    break;
+
                 case EXIT:
                     StaffView.showMessage("Exit");
                     return;

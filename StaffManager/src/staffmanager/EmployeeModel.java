@@ -63,17 +63,17 @@ public class EmployeeModel {
     }
 
     public String[] getDepartments() {
-        return departments.clone();
+        return departments;
 
     }
 
     public String[] getManagerTypes() {
-        return managerTypes.clone();
+        return managerTypes;
 
     }
 
     public void sortEmployees() {
-        MergeSort.mergeSort(employees, 0, employees.size() - 1, true);
+        MergeSort.mergeSort(employees, 0, employees.size() - 1, false);
         isEmployeeSorted = true;
         
     }
@@ -96,7 +96,28 @@ public class EmployeeModel {
         employees.add(employee);
         newEmployees.add(employee);
         isEmployeeSorted = false;
+
+    }
+
+
+    public EmployeeTree buildEmployeeTree() {
+
+        ArrayList<Employee> treeEmployees = new ArrayList<>(employees);
         
+        if(!isEmployeeSorted){
+            MergeSort.mergeSort(treeEmployees, 0, treeEmployees.size() - 1, false);
+            
+        }
+        
+        MergeSort.mergeSort(treeEmployees, 0, treeEmployees.size() - 1, true);
+
+        EmployeeTree tree = new EmployeeTree();
+
+        for (Employee employee : treeEmployees) {
+            tree.insert(employee);
+        }
+
+        return tree;
     }
 }
 

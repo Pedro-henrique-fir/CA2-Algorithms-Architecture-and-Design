@@ -13,23 +13,23 @@ import java.util.ArrayList;
 public class MergeSort {
     
 
-    public static void mergeSort(ArrayList<Employee> employees, int left, int right, boolean byManager){
+    public static void mergeSort(ArrayList<Employee> employees, int left, int right, boolean sortByManager){
 
         if (left < right) {
 
             int mid = (left + right) / 2;
 
-            mergeSort(employees, left, mid, byManager);
-            mergeSort(employees, mid + 1, right, byManager);
+            mergeSort(employees, left, mid, sortByManager);
+            mergeSort(employees, mid + 1, right, sortByManager);
 
-            merge(employees, left, mid, right, byManager);
+            merge(employees, left, mid, right, sortByManager);
         }
     }
 
 
-    private static int compare(Employee a, Employee b, boolean byManager) {
+    private static int compareEmployees(Employee a, Employee b, boolean sortByManager) {
 
-        if (byManager) {
+        if (sortByManager) {
             return b.getManagerRank() - a.getManagerRank();
         }
 
@@ -37,7 +37,7 @@ public class MergeSort {
     }
 
 
-    public static void merge(ArrayList<Employee> employees, int left, int mid, int right, boolean byManager){
+    public static void merge(ArrayList<Employee> employees, int left, int mid, int right, boolean sortByManager){
 
         int n1 = mid - left + 1;
         int n2 = right - mid;
@@ -61,7 +61,7 @@ public class MergeSort {
         
         while (i < n1 && j < n2) {
 
-            if (compare(L.get(i), R.get(j), byManager) <= 0) {
+            if (compareEmployees(L.get(i), R.get(j), sortByManager) <= 0) {
 
                 employees.set(k, L.get(i));
                 i++;

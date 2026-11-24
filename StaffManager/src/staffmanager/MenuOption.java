@@ -13,7 +13,8 @@ public enum MenuOption {
     SORT(1, "Sort Employees"),
     SEARCH(2, "Search Employee"),
     ADD_RECORDS(3, "Add Employee"),
-    EXIT(4, "Exit");
+    BINARY_TREE(4, "Binary Tree"),
+    EXIT(5, "Exit");
 
     private int number;
     private String description;

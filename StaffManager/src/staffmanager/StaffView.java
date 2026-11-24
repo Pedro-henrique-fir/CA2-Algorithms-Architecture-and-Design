@@ -88,5 +88,27 @@ public class StaffView {
             System.out.println("    - Manager Type: " + employee.getManagerType());
         }
     }
+
+    public static void showEmployeeTree(ArrayList<ArrayList<Employee>> levels, int height, int nodeCount) {
+
+        System.out.println("\n=-=-=-= EMPLOYEE HIERARCHY (LEVEL ORDER) =-=-=-=");
+
+        for (int i = 0; i < levels.size(); i++) {
+
+            System.out.println("\nLevel " + i + ":");
+
+            ArrayList<Employee> level = levels.get(i);
+
+            for (int j = 0; j < level.size(); j++) {
+
+                Employee employee = level.get(j);
+
+                System.out.println("    " + employee.getFullName() + " | " + employee.getManagerType() + " | " + employee.getDepartment());
+            }
+        }
+
+        System.out.println("\nTree height: " + height);
+        System.out.println("Total nodes: " + nodeCount);
+    }
 }
 
