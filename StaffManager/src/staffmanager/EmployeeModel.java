@@ -17,6 +17,24 @@ public class EmployeeModel {
 
     private boolean isEmployeeSorted;
 
+    private final String[] departments = {
+        "Mathematics",
+        "English",
+        "Science",
+        "Humanities",
+        "IT",
+        "Finance",
+        "Administration",
+        "Student Services"
+    };
+
+    private final String[] managerTypes = {
+        "Non-Manager",
+        "Head of Department",
+        "Deputy Principal",
+        "Principal"
+    };
+
     public EmployeeModel(ArrayList<Employee> employees) {
 
         this.employees = employees;
@@ -41,7 +59,17 @@ public class EmployeeModel {
 
     public ArrayList<Employee> getNewEmployees() {
         return new ArrayList<>(newEmployees);
-        
+
+    }
+
+    public String[] getDepartments() {
+        return departments.clone();
+
+    }
+
+    public String[] getManagerTypes() {
+        return managerTypes.clone();
+
     }
 
     public void sortEmployees() {
