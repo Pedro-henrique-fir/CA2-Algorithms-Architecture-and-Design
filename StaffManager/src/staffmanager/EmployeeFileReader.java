@@ -16,7 +16,7 @@ import java.util.ArrayList;
 public class EmployeeFileReader {
  
     
-    public static ArrayList<Employee> readFile(String fileName) {
+    public static ArrayList<Employee> readFile(String fileName, ArrayList<String> messages) {
         
         ArrayList<Employee> employees = new ArrayList<>();
 
@@ -37,7 +37,7 @@ public class EmployeeFileReader {
                 String[] data = line.split(",", -1);
                 
                 if (data.length != 8) {
-                    System.out.println("Invalid record: " + line);
+                    messages.add("Invalid record: " + line);
                     continue;
                 }
                 
@@ -67,7 +67,7 @@ public class EmployeeFileReader {
             
             
         } catch (FileNotFoundException e) {
-            System.out.println("File not found: " + fileName);
+            messages.add("File not found: " + fileName);
             
             
         }

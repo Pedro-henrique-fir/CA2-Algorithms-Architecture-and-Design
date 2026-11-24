@@ -40,93 +40,70 @@ public class StaffManager {
         };
         
         Scanner myKB = new Scanner(System.in);
-        
-        ArrayList<Employee> employees = EmployeeFileReader.readFile("SchoolEmployees.txt");
-        ArrayList<Employee> newEmployees = new ArrayList<>();
+
+        ArrayList<String> fileMessages = new ArrayList<>();
+
+        ArrayList<Employee> loadedEmployees = EmployeeFileReader.readFile("SchoolEmployees.txt", fileMessages);
+
+        EmployeeModel model = new EmployeeModel(loadedEmployees);
+
+        for (String message : fileMessages) {
+            StaffView.showMessage(message);
+            
+        }
         
             
         while(true){
             
-            System.out.println("\n===== SCHOOL EMPLOYEE MANAGEMENT =====");
-            
-            for (MenuOption menu : MenuOption.values()) {
-                System.out.println(
-                        menu.getNumber() + ". " + menu.getDescription());
-            }
-            
-            System.out.print("Choose an option: ");      
+            StaffView.showMenu();
             
             MenuOption option = MenuOption.findOption(myKB.nextLine().trim());
-            
-            if (option == null) {
-                System.out.println("Invalid option");
-                continue;
-                
-            }
 
+            if (option == null) {
+                StaffView.showMessage("Invalid option. Try again.");
+                continue;
+            }
                
             switch (option) {
 
                 case SORT:
-                    System.out.println("Sort");
                     
-                    if (employees.isEmpty()) {
-                        System.out.println("No employees available.");
+                    if (model.isEmpty()) {
+                        StaffView.showMessage("No employees available.");
                         break;
                     }
-
-                    MergeSort.mergeSort(employees, 0, employees.size() - 1);
-                    isEmployeeSorted = true;
-
-                    System.out.println("\nEmployees Sorted:");
+                    
+                    model.sortEmployees();
 
                     int limit = 20;
-                    
-                    if (employees.size() < 20) {
-                         limit = employees.size();
+
+                    if (model.getEmployeeCount() < 20) {
+                        limit = model.getEmployeeCount();
                         
                     }
 
-                    for (int i = 0; i < limit; i++) {
-                        System.out.println((i + 1) + " - " + employees.get(i).getFullName());
-                    }
+                    StaffView.showSortedEmployees(model.getEmployees(), limit);
 
                     break;
 
                 case SEARCH:
-                    if (employees.isEmpty()) {
-                        System.out.println("No employees");
-                        break;
-                        
-                    }
-
-                    System.out.print("Enter employee full name: ");
-                    String name = myKB.nextLine().trim();
-
-                    if (name.isEmpty()) {
-                        System.out.println("Name cannot be empty.");
+                    if (model.isEmpty()) {
+                        StaffView.showMessage("No employees available.");
                         break;
                     }
 
-                    if(!isEmployeeSorted){
-                        MergeSort.mergeSort(employees, 0, employees.size() - 1);
+                    String name = requiredField(myKB, "Enter employee full name: ");
+
+                    Employee employee = model.searchEmployee(name);
+
+                    if (employee == null) {
+                        StaffView.showMessage("Employee not found.");
                         
-                    }
-
-                    
-                    int index = BinarySearch.binarySearch(employees, 0, employees.size() - 1, name);
-
-                    if (index == -1) {
-                        System.out.println("Employee not found.");
                         
                     } else {
-
-                        Employee employee = employees.get(index);
-
-                        System.out.println("\nEmployee found");
-                        System.out.println("Name: " + employee.getFullName());
-                        System.out.println("Department: " + employee.getDepartment());
-                        System.out.println("Manager Type: " + employee.getManagerType());
+                        StaffView.showSearchResult(employee);
+                        
+                        
                     }
 
                     break;
@@ -135,25 +112,14 @@ public class StaffManager {
                     String firstName = requiredField(myKB, "\nFirst name: ");
                     String lastName = requiredField(myKB, "Last name: ");
                     
-                    System.out.println("\nDepartments:");
-
-                    for (int i = 0; i < departments.length; i++) {
-                        System.out.println((i + 1) + " - " + departments[i]);
-                        
-                    }
+                    StaffView.showOptions("Departments:", departments);
 
                     
                     int departmentChoice = takeChoice(myKB, "\nChoose a department: ", departments.length);
                     String department = departments[departmentChoice - 1];
                     
                     
-                    System.out.println("\nManager Types:");
-
-                    for (int i = 0; i < managerTypes.length; i++) {
-                        System.out.println((i + 1) + " - " + managerTypes[i]);
-                        
-                        
-                    }
+                    StaffView.showOptions("Manager Types:", managerTypes);
                     
                     int managerChoice = takeChoice(myKB, "\nChoose a manager type: ", managerTypes.length);
                     String managerType = managerTypes[managerChoice - 1];
@@ -170,44 +136,26 @@ public class StaffManager {
                     
                     Employee newEmployee = new Employee(firstName, lastName, gender, email, salary, department, jobTitle, managerType);
                     
-                    employees.add(newEmployee);
-                    newEmployees.add(newEmployee);
-                    isEmployeeSorted = false;
-
-
-                    System.out.println("\n=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=");
+                    model.addEmployee(newEmployee);
+                    StaffView.showEmployeeDetails(newEmployee);
                     
-                    System.out.println("\nEMPLOYEE DETAILS:\n");
-                    System.out.println("    - Name: " + newEmployee.getFullName());
-                    System.out.println("    - Gender: " + gender);
-                    System.out.println("    - Email: " + email);
-                    System.out.println("    - Salary: " + salary);
-                    System.out.println("    - Department: " + department);
-                    System.out.println("    - Job Title: " + jobTitle);
-                    System.out.println("    - Manager Type: " + managerType);
+                    StaffView.showMessage(
+                            "\nEmployee added successfully!");
 
-                    System.out.println("\nEmployee added successfully!");
-                    
-                    System.out.println("Total employees: " + employees.size());
-                    System.out.println("\n=-=-=-= NEW EMPLOYEES =-=-=-= ");
+                    StaffView.showMessage(
+                            "Total employees: " + model.getEmployeeCount());
 
-                    for (int i = 0; i < newEmployees.size(); i++) {
-
-                        Employee employee = newEmployees.get(i);
-
-                        System.out.println((i + 1) + " . " + employee.getFullName());
-                        System.out.println("    - Department: " + employee.getDepartment());
-                        System.out.println("    - Manager Type: " + employee.getManagerType());
-                    }
+                    StaffView.showNewEmployees(
+                            model.getNewEmployees());
 
                     break;
 
                 case EXIT:
-                    System.out.println("Exit");
+                    StaffView.showMessage("Exit");
                     return;
 
                 default:
-                    System.out.println("Invalid option");
+                    StaffView.showMessage("Invalid option");
                     
             }
         }
@@ -218,21 +166,21 @@ public class StaffManager {
     private static String requiredField(Scanner scanner, String message) {
 
         while (true) {
-            System.out.print(message);
+            StaffView.showPrompt(message);
             String value = scanner.nextLine().trim();
 
             if (!value.isEmpty()) {
                 return value;
             }
 
-            System.out.println("This can not be empty. Try again.");
+            StaffView.showMessage("This can not be empty. Try again.");
         }
     }
 
     private static int takeChoice(Scanner scanner, String message, int max) {
 
         while (true) {
-            System.out.print(message);
+            StaffView.showPrompt(message);
 
             try {
                 int choice = Integer.parseInt(scanner.nextLine().trim());
@@ -241,11 +189,11 @@ public class StaffManager {
                     return choice;
                 }
 
-                System.out.println("Choose a number between 1 and " + max + ".");
+                StaffView.showMessage("Choose a number between 1 and " + max + ".");
 
                 
             } catch (NumberFormatException e) {
-                System.out.println("Invalid. Enter a number.");
+                StaffView.showMessage("Invalid. Enter a number.");
                 
             }
         }
@@ -254,21 +202,21 @@ public class StaffManager {
     private static String checkEmail(Scanner scanner) {
 
         while (true) {
-            System.out.print("Email: ");
+            StaffView.showPrompt("Email: ");
             String email = scanner.nextLine().trim();
 
             if (!email.isEmpty() && email.contains("@")) {
                 return email;
             }
 
-            System.out.println("Invalid email. Try again.");
+            StaffView.showMessage("Invalid email. Try again.");
         }
     }
 
     private static double checkSalary(Scanner scanner) {
 
         while (true) {
-            System.out.print("Annual salary: ");
+            StaffView.showPrompt("Annual salary: ");
 
             try {
                 double salary = Double.parseDouble(scanner.nextLine().trim());
@@ -277,11 +225,11 @@ public class StaffManager {
                     return salary;
                 }
 
-                System.out.println("It must be a positive number");
+                StaffView.showMessage("It must be a positive number");
                 
 
             } catch (NumberFormatException e) {
-                System.out.println("Invalid salary. Enter a number.");
+                StaffView.showMessage("Invalid salary. Enter a number.");
                 
             }
         }
