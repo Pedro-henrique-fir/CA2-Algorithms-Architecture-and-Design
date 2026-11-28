@@ -4,6 +4,7 @@
  */
 package staffmanager;
 
+import java.util.ArrayList;
 import java.util.Scanner;
 
 /**
@@ -20,6 +21,8 @@ public class StaffController {
     }
 
     public void run() {
+
+        loadFile();
 
         while(true){
 
@@ -138,6 +141,29 @@ public class StaffController {
 
     }
 
+
+    private void loadFile() {
+
+        while (true) {
+
+            String fileName = requiredField("Please enter the filename to read. (ex: Applicants_Form.txt): ");
+
+            ArrayList<String> fileMessages = new ArrayList<>();
+
+            boolean isFileRead = model.loadEmployees(fileName, fileMessages);
+
+            for (int i = 0; i < fileMessages.size(); i++) {
+                StaffView.showMessage(fileMessages.get(i));
+            }
+
+            if (isFileRead) {
+                StaffView.showMessage("File read successfully");
+                return;
+            }
+
+            StaffView.showMessage("No employees were loaded. Try again.");
+        }
+    }
 
     private String requiredField(String message) {
 

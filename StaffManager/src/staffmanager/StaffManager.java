@@ -4,8 +4,6 @@
  */
 package staffmanager;
 
-import java.util.ArrayList;
-
 
 /**
  *
@@ -18,16 +16,7 @@ public class StaffManager {
      */
     public static void main(String[] args) {
 
-        ArrayList<String> fileMessages = new ArrayList<>();
-
-        ArrayList<Employee> employees = EmployeeFileReader.readFile("schoolEmployees.txt", fileMessages);
-
-        for (String message : fileMessages) {
-            StaffView.showMessage(message);
-
-        }
-
-        EmployeeModel model = new EmployeeModel(employees);
+        EmployeeModel model = new EmployeeModel();
         StaffController controller = new StaffController(model);
 
         controller.run();

@@ -35,11 +35,25 @@ public class EmployeeModel {
         "Principal"
     };
 
-    public EmployeeModel(ArrayList<Employee> employees) {
+    public EmployeeModel() {
 
-        this.employees = employees;
+        this.employees = new ArrayList<>();
         this.newEmployees = new ArrayList<>();
         this.isEmployeeSorted = false;
+    }
+
+    public boolean loadEmployees(String fileName, ArrayList<String> messages) {
+
+        ArrayList<Employee> loadedEmployees = EmployeeFileReader.readFile(fileName, messages);
+
+        if (loadedEmployees.isEmpty()) {
+            return false;
+        }
+
+        employees.addAll(loadedEmployees);
+        isEmployeeSorted = false;
+
+        return true;
     }
 
     public boolean isEmpty() {
